@@ -1,6 +1,6 @@
 import {
-  FETCH_STORIES_SUCCESS
-} from './actionTypes';
+  FETCH_STORIES
+} from '../actions/actionTypes';
 
 const initialState = {
   stories: null
@@ -8,8 +8,8 @@ const initialState = {
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
-    case FETCH_STORIES_SUCCESS:
-      const stories = action.data.stories
+    case FETCH_STORIES:
+      const stories = action.payload
       return {
         ...state,
         stories

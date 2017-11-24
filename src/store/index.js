@@ -1,19 +1,19 @@
-import { combineReducers, createStore } from 'redux';
-import thunk from 'react-redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 //import createLogger from 'react-logger';
 
-//import app from '../app/reducers';
-import stories from '../stories/reducers';
+import stories from '../reducers';
 
 const reducer = combineReducers({
   stories
 })
 
-//const logger = createLogger();
+const middleware = applyMiddleware(thunk);
 
 export default function configureStore() {
   const store = createStore(
-    reducer
+    reducer,
+    middleware
   )
   return store;
 }

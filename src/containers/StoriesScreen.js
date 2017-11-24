@@ -1,12 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import StoriesScreen from '../components/StoriesScreen';
-import * as StoriesActions from '../actions';
+import * as actions from '../actions';
 
 function mapStateToProps(state) {
   return {
-    stories: ['story1', 'story2']
+    stories: state.stories
   }
 }
 
-export default connect(mapStateToProps, StoriesActions)(StoriesScreen);
+export default connect(mapStateToProps, actions)(StoriesScreen);
