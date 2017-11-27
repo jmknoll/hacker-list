@@ -8,14 +8,14 @@ import {
 export function fetchStories() {
   return function(dispatch) {
     request
-    .get('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+    .get('https://hacker-news.firebaseio.com/v0/topstories.json')
     .end( (err, res) => {
       if ( err || !res.ok ) {
         alert('there has been an error')
       } else {
         dispatch({
           type: FETCH_STORIES,
-          payload: res.body
+          data: res.body
         })
       }
     })

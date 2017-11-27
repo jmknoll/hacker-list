@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 function mapStateToProps(state) {
   return {
-    stories: state.stories
+    stories: state.stories.stories
   }
 }
 
