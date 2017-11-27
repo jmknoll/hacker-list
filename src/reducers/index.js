@@ -1,16 +1,16 @@
 import {
-  FETCH_STORIES
+  FETCH_TOP_STORIES
 } from '../actions/actionTypes';
 
 const initialState = {
-  stories: ['story 1', 'story 2']
+  stories: []
 };
 
 export default function reducer(state=initialState, action) {
-  console.log('running reducer')
-    console.log(state)
   switch(action.type) {
-    case FETCH_STORIES: 
+    case FETCH_TOP_STORIES: 
+      console.log('running fetchTopStores')
+      console.log(action)
       const stories = action.data
       return {
         ...state,

@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+
 import {
   View,
   Text,
   ListView
 } from 'react-native';
+
+import StoryListItem from './StoryListItem';
 
 class StoriesScreen extends Component {
 
@@ -28,14 +31,11 @@ class StoriesScreen extends Component {
     })
   }
   render() {
-    const stories = this.props.stories
-    console.log(stories)
     return(
       <View>
-        <Text>These are all the new stories</Text>
         <ListView 
           dataSource={this.state.ds.cloneWithRows(this.props.stories)}
-          renderRow={ (rowData) => <Text>{rowData}</Text>}
+          renderRow={ (rowData) => <StoryListItem data={rowData} />}
         />
       </View>
     )
