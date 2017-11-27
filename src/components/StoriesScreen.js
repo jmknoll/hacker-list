@@ -17,7 +17,7 @@ class StoriesScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchStories()
+    this.props.fetchStories(this.props.sIndex)
   }
 
   renderStories() {
@@ -55,6 +55,10 @@ class StoriesScreen extends Component {
     );
   };
 
+  handleEndReached() {
+    this.props.fetchNextTopStories(this.props.topStoryIds, 13, 12)
+  }
+
 
   render() {
     return(
@@ -65,6 +69,8 @@ class StoriesScreen extends Component {
           keyExtractor={item => item.id}
           ItemSeparatorComponent={this.renderSeparator}
           ListFooterComponent={this.renderFooter}
+          onEndReachedThreshold={0.1}
+          onEndReached={() => this.handleEndReached()}
         />
       </View>
     )

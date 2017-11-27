@@ -7,7 +7,7 @@ import {
   API_REQUEST
 } from './actionTypes';
 
-export function fetchStories() {
+export function fetchStories(sIndex) {
   return function(dispatch) {
     request
     .get('https://hacker-news.firebaseio.com/v0/topstories.json')
@@ -43,14 +43,17 @@ export function fetchStories() {
             })
           }
         }
-        fetchStoriesById(res.body, 0, 12)
+        fetchStoriesById(res.body, sIndex, 12)
       }
     })
   }
 }
 
 export function fetchNextTopStories(topStoryIds, sIndex, amount) {
-  for (let i = sIndex; i < sIndex + amount; i++) {
+  return function(dispatch) {
+    if (!topStoryIds) {return}
+    let storiesToAdd = [];
+    for (let i = sIndex; i < sIndex + amount; i++) {
     request
     .get(`https://hacker-news.firebaseio.com/v0/item/${topStoryIds[i]}.json`)
       .end( (err, res) => {
@@ -67,4 +70,5 @@ export function fetchNextTopStories(topStoryIds, sIndex, amount) {
         }
       })
     }
+  }
   }

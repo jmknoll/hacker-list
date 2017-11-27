@@ -5,7 +5,8 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  stories: []
+  stories: [],
+  sIndex: 0
 };
 
 export default function reducer(state=initialState, action) {
@@ -18,17 +19,20 @@ export default function reducer(state=initialState, action) {
       };
     case FETCH_TOP_STORIES: 
       const stories = action.data;
+      var sIndex = state.sIndex + action.data.length;
       return {
         ...state,
-        stories
+        stories,
+        sIndex
       };
     case FETCH_NEXT_TOP_STORIES:
-      const next_stories = action.data;
-      console.log('state according to fnts reducer case')
-      console.log(state)
+      const nextStories = action.data;
+      let newStories = state.stories.concat(nextStories)
+      var sIndex = state.sIndex + action.data.length;
       return {
         ...state,
-        stories
+        stories: newStories,
+        sIndex
       }
     default:
       return state;
