@@ -2,6 +2,8 @@ import request from 'superagent';
 
 import {
   FETCH_TOP_STORIES,
+  FETCH_TOP_STORY_IDS,
+  FETCH_NEXT_TOP_STORIES,
   API_REQUEST
 } from './actionTypes';
 
@@ -16,9 +18,14 @@ export function fetchStories() {
 
         let storiesToAdd = [];
 
+        dispatch({
+          type: FETCH_TOP_STORY_IDS,
+          data: res.body
+        })
+
 
         function fetchStoriesById(topStoryIds, sIndex, amount) {
-          for (let i = 0; i < sIndex + amount; i++) {
+          for (let i = sIndex; i < sIndex + amount; i++) {
             request
             .get(`https://hacker-news.firebaseio.com/v0/item/${topStoryIds[i]}.json`)
             .end( (err, res) => {
@@ -26,7 +33,7 @@ export function fetchStories() {
                 console.error('there has been an error fetching item #' + topStoryIds[i])
               } else {
                 storiesToAdd.push(res.body);
-                if ( storiesToAdd.length === amount ) {
+                if ( i === sIndex + amount - 1) {
                   dispatch({
                     type: FETCH_TOP_STORIES,
                     data: storiesToAdd
@@ -36,9 +43,28 @@ export function fetchStories() {
             })
           }
         }
-
         fetchStoriesById(res.body, 0, 12)
       }
     })
   }
 }
+
+export function fetchNextTopStories(topStoryIds, sIndex, amount) {
+  for (let i = sIndex; i < sIndex + amount; i++) {
+    request
+    .get(`https://hacker-news.firebaseio.com/v0/item/${topStoryIds[i]}.json`)
+      .end( (err, res) => {
+        if (err || !res.ok ) {
+          console.error('there has been an error fetching item #' + topStoryIds[i])
+        } else {
+          storiesToAdd.push(res.body);
+          if ( i === sIndex + amount - 1) {
+            dispatch({
+              type: FETCH_NEXT_TOP_STORIES,
+              data: storiesToAdd
+            })
+          }
+        }
+      })
+    }
+  }

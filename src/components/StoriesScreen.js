@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  ListView
+  FlatList,
+  ActivityIndicator
 } from 'react-native';
 
 import StoryListItem from './StoryListItem';
@@ -13,10 +14,6 @@ class StoriesScreen extends Component {
   constructor(props) {
     super(props);
     this.renderStories = this.renderStories.bind(this);
-
-    this.state = {
-      ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    }
   }
 
   componentDidMount() {
@@ -30,12 +27,44 @@ class StoriesScreen extends Component {
       )
     })
   }
+
+  renderSeparator() {
+    return(
+      <View style={{
+        backgroundColor: '#ccc',
+        height: 1,
+        width: "100%"
+      }} />
+    );
+  };
+
+  renderFooter() {
+
+    //if (!this.props.apiRequestInProgress) return null; loading should come from application state
+
+    return (
+      <View
+        style={{
+          paddingVertical: 20,
+          borderTopWidth: 1,
+          borderColor: "#CED0CE"
+        }}
+      >
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
+  };
+
+
   render() {
     return(
       <View>
-        <ListView 
-          dataSource={this.state.ds.cloneWithRows(this.props.stories)}
-          renderRow={ (rowData) => <StoryListItem data={rowData} />}
+        <FlatList
+          data={this.props.stories}
+          renderItem={ ({item}) => <StoryListItem data={item} />}
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListFooterComponent={this.renderFooter}
         />
       </View>
     )

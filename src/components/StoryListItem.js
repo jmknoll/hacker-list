@@ -13,7 +13,6 @@ const StoryListItem = (props) => {
       <Text style={styles.title}>{props.data.title}</Text>
       <Text style={styles.author}>{props.data.by}</Text>
       <Text style={styles.comments}>{props.data.descendants} comments</Text>
-      <Text onPress={ () => Linking.openURL('https://www.google.com') }>www.google.com</Text>
     </View>
   )
 }
@@ -23,9 +22,6 @@ export default StoryListItem;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
-    borderStyle: 'solid',
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
