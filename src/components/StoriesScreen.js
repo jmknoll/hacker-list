@@ -56,7 +56,7 @@ class StoriesScreen extends Component {
   };
 
   handleEndReached() {
-    this.props.fetchNextTopStories(this.props.topStoryIds, 13, 12)
+    this.props.fetchNextTopStories(this.props.topStoryIds, this.props.sIndex, 12)
   }
 
 

@@ -19,7 +19,7 @@ export default function reducer(state=initialState, action) {
       };
     case FETCH_TOP_STORIES: 
       const stories = action.data;
-      var sIndex = state.sIndex + action.data.length;
+      var sIndex = state.sIndex + stories.length;
       return {
         ...state,
         stories,
@@ -28,7 +28,9 @@ export default function reducer(state=initialState, action) {
     case FETCH_NEXT_TOP_STORIES:
       const nextStories = action.data;
       let newStories = state.stories.concat(nextStories)
-      var sIndex = state.sIndex + action.data.length;
+      var sIndex = newStories.length + 1;
+      console.log('fetching next top stories');
+      console.log(state)
       return {
         ...state,
         stories: newStories,
