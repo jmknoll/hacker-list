@@ -9,13 +9,14 @@ describe('comments reducer', () => {
     })
   })
 
-  it('handles action of type FETCH_TOP_STORY_IDS', () => {
-    const action = { type: types.FETCH_TOP_STORY_IDS, data: [123, 456] }
+  it('handles action of type FETCH_TOP_STORY_IDS_SUCCESS', () => {
+    const action = { type: types.FETCH_TOP_STORY_IDS_SUCCESS, data: [123, 456] }
     expect(reducer([], action)).toEqual({
       topStoryIds: action.data
     })
   })
 
+  // this test still needs some work
   it('handles action of type FETCH_TOP_STORIES', () => {
     return
     const action = { type: types.FETCH_TOP_STORIES, data: ['story1', 'story2'] }

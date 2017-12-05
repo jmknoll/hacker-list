@@ -8,7 +8,7 @@ import expect from 'expect';
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const mockResult =  [123, 456] 
+const mockIds =  [123, 456] 
 
 describe('async actions for stories', () => {
   afterEach(() => {
@@ -17,10 +17,10 @@ describe('async actions for stories', () => {
   })
 
   it('should create FETCH_TOP_IDS_SUCCESS after fetching top story ids', () => {
-    fetchMock.mock('https://hacker-news.firebaseio.com/v0/topstories.json', mockResult)
+    fetchMock.mock('https://hacker-news.firebaseio.com/v0/topstories.json', mockIds)
 
     const expectedActions = [
-      { type: types.FETCH_TOP_STORY_IDS_SUCCESS, data: mockResult }
+      { type: types.FETCH_TOP_STORY_IDS_SUCCESS, data: mockIds }
     ]
 
     const store = mockStore({ stories: {
@@ -31,6 +31,12 @@ describe('async actions for stories', () => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
+
+  /*
+  it('should craete FETCH_TOP_STORIES_SUCCESS after fetching list of new top stories', () => {
+    fetchMock.mock('https')
+  })
+  */
 
 })
 

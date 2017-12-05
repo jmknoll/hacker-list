@@ -33,6 +33,34 @@ export function fetchTopStoryIds() {
   }
 }
 
+
+function fetchTopStoriesSuccess(body) {
+  return {
+    type: FETCH_TOP_STORIES_SUCCESS,
+    data: body
+  }
+}
+
+function fetchTopstoriesFailure(ex) {
+  return {
+    type: FETCH_TOP_STORIES_FAILURE,
+    data: ex
+  }
+}
+
+/*
+this is the new way, but commenting out for now because i need to go to the airport and want this working before i leave
+export function fetchTopStories() {
+  return dispatch => {
+
+  }
+}
+*/
+
+
+/*
+
+this is the old spaghetti-fied way of doing things
 export function fetchStories(sIndex) {
   return function(dispatch) {
     request
@@ -98,3 +126,5 @@ export function fetchNextTopStories(topStoryIds, sIndex, amount) {
     }
   }
   }
+
+*/

@@ -14,8 +14,6 @@ const initialState = {
 export default function reducer(state=initialState, action) {
   switch(action.type) {
     case FETCH_TOP_STORY_IDS_SUCCESS:
-
-      console.log(action)
       const topStoryIds = action.data;
       return {
         ...state,
