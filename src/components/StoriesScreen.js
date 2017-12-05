@@ -17,7 +17,8 @@ class StoriesScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchStories(this.props.sIndex)
+    //this.props.fetchStories(this.props.sIndex)
+    this.props.fetchTopStoryIds();
   }
 
   renderStories() {

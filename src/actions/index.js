@@ -3,9 +3,35 @@ import request from 'superagent';
 import {
   FETCH_TOP_STORIES,
   FETCH_TOP_STORY_IDS,
+  FETCH_TOP_STORY_IDS_SUCCESS,
+  FETCH_TOP_STORY_IDS_FAILURE,
   FETCH_NEXT_TOP_STORIES,
-  API_REQUEST
+  API_REQUEST,
 } from './actionTypes';
+
+
+function fetchTopStoryIdsSuccess(body) {
+  return {
+    type: FETCH_TOP_STORY_IDS_SUCCESS,
+    data: body
+  }
+}
+
+function fetchTopStoryIdsFailure(ex) {
+  return {
+    type: FETCH_TOP_STORY_IDS_FAILURE,
+    data: ex
+  }
+}
+
+export function fetchTopStoryIds() {
+  return dispatch => {
+    return fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
+    .then(res => res.json())
+    .then(body => dispatch(fetchTopStoryIdsSuccess(body)))
+    .catch(ex => dispatch(fetchTopStoryIdsFailure(ex)))
+  }
+}
 
 export function fetchStories(sIndex) {
   return function(dispatch) {

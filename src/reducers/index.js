@@ -1,7 +1,9 @@
 import {
   FETCH_TOP_STORIES,
   FETCH_TOP_STORY_IDS,
-  FETCH_NEXT_TOP_STORIES
+  FETCH_NEXT_TOP_STORIES,
+  FETCH_TOP_STORY_IDS_SUCCESS,
+  FETCH_TOP_STORY_IDS_FAILURE
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -11,7 +13,9 @@ const initialState = {
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
-    case FETCH_TOP_STORY_IDS:
+    case FETCH_TOP_STORY_IDS_SUCCESS:
+
+      console.log(action)
       const topStoryIds = action.data;
       return {
         ...state,
@@ -29,8 +33,6 @@ export default function reducer(state=initialState, action) {
       const nextStories = action.data;
       let newStories = state.stories.concat(nextStories)
       var sIndex = newStories.length + 1;
-      console.log('fetching next top stories');
-      console.log(state)
       return {
         ...state,
         stories: newStories,
