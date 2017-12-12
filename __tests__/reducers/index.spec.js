@@ -16,7 +16,7 @@ const mockTopStories = [{
 describe('comments reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
-      "sIndex": 0,
+      "startIndex": 0,
       "topStories": [],
     })
   })
@@ -30,7 +30,12 @@ describe('comments reducer', () => {
 
   it('handles action of type FETCH_TOP_STORIES_SUCCESS', () => {
     const action = { type: types.FETCH_TOP_STORIES_SUCCESS, data: mockTopStories }
-    expect(reducer({topStories: []}, action)).toEqual({
+    //make sure to test the start index as part of this reducer
+    expect(reducer({
+      startIndex: 0,
+      topStories: [],
+    }, action)).toEqual({
+      startIndex: 1,
       topStories: action.data
     })
   })
