@@ -19,6 +19,16 @@ class StoriesScreen extends Component {
     this.props.fetchTopStoryIds();
   }
 
+  renderSeparator() {
+    return(
+      <View style={{
+        backgroundColor: '#ccc',
+        height: 1,
+        width: "100%"
+      }} />
+    );
+  };
+
 
   renderFooter() {
 
@@ -38,8 +48,7 @@ class StoriesScreen extends Component {
   };
 
   handleEndReached() {
-    return
-    //this.props.fetchNextTopStories(this.props.topStoryIds, this.props.sIndex, 12)
+    this.props.fetchTopStories(this.props.topStoryIds, this.props.startIndex, 12)
   }
 
   componentWillReceiveProps(nextProps) {

@@ -7,7 +7,7 @@ function mapStateToProps(state) {
   return {
     topStories: state.stories.topStories,
     topStoryIds: state.stories.topStoryIds,
-    sIndex: state.stories.sIndex
+    startIndex: state.stories.startIndex
   }
 }
 

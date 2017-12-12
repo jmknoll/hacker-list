@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   topStories: [],
-  sIndex: 0
+  startIndex: 0
 };
 
 export default function reducer(state=initialState, action) {
@@ -21,10 +21,12 @@ export default function reducer(state=initialState, action) {
         topStoryIds
       };
     case FETCH_TOP_STORIES_SUCCESS:
-      let topStories = state.topStories.concat(action.data)
+      let topStories = state.topStories.concat(action.data);
+      let startIndex = state.startIndex + action.data.length
       return {
         ...state,
-        topStories
+        topStories,
+        startIndex
       };
     default:
       return state;
