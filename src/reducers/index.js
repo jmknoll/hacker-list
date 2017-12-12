@@ -3,11 +3,12 @@ import {
   FETCH_TOP_STORY_IDS,
   FETCH_NEXT_TOP_STORIES,
   FETCH_TOP_STORY_IDS_SUCCESS,
-  FETCH_TOP_STORY_IDS_FAILURE
+  FETCH_TOP_STORY_IDS_FAILURE,
+  FETCH_TOP_STORIES_SUCCESS
 } from '../actions/actionTypes';
 
 const initialState = {
-  stories: [],
+  topStories: [],
   sIndex: 0
 };
 
@@ -19,23 +20,12 @@ export default function reducer(state=initialState, action) {
         ...state,
         topStoryIds
       };
-    case FETCH_TOP_STORIES: 
-      const stories = action.data;
-      var sIndex = state.sIndex + stories.length;
+    case FETCH_TOP_STORIES_SUCCESS:
+      let topStories = state.topStories.concat(action.data)
       return {
         ...state,
-        stories,
-        sIndex
+        topStories
       };
-    case FETCH_NEXT_TOP_STORIES:
-      const nextStories = action.data;
-      let newStories = state.stories.concat(nextStories)
-      var sIndex = newStories.length + 1;
-      return {
-        ...state,
-        stories: newStories,
-        sIndex
-      }
     default:
       return state;
   }

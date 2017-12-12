@@ -13,31 +13,12 @@ class StoriesScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.renderStories = this.renderStories.bind(this);
   }
 
   componentDidMount() {
-    //this.props.fetchStories(this.props.sIndex)
     this.props.fetchTopStoryIds();
   }
 
-  renderStories() {
-    stories.map( (story, id) => {
-      return (
-        <Text key={id}>I'm a story</Text>
-      )
-    })
-  }
-
-  renderSeparator() {
-    return(
-      <View style={{
-        backgroundColor: '#ccc',
-        height: 1,
-        width: "100%"
-      }} />
-    );
-  };
 
   renderFooter() {
 
@@ -57,7 +38,12 @@ class StoriesScreen extends Component {
   };
 
   handleEndReached() {
-    this.props.fetchNextTopStories(this.props.topStoryIds, this.props.sIndex, 12)
+    return
+    //this.props.fetchNextTopStories(this.props.topStoryIds, this.props.sIndex, 12)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
   }
 
 
@@ -65,7 +51,7 @@ class StoriesScreen extends Component {
     return(
       <View>
         <FlatList
-          data={this.props.stories}
+          data={this.props.topStories}
           renderItem={ ({item}) => <StoryListItem data={item} />}
           keyExtractor={item => item.id}
           ItemSeparatorComponent={this.renderSeparator}
