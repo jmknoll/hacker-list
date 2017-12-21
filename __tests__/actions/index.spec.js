@@ -29,6 +29,7 @@ describe('async actions for stories', () => {
 
   it('should create FETCH_TOP_IDS_SUCCESS after fetching top story ids', () => {
     fetchMock.mock('https://hacker-news.firebaseio.com/v0/topstories.json', mockIds)
+    .catch()
 
     const expectedActions = [
       { type: types.FETCH_TOP_STORY_IDS_SUCCESS, data: mockIds }
@@ -46,15 +47,16 @@ describe('async actions for stories', () => {
   it('should create FETCH_TOP_STORIES_SUCCESS after fetching list of new top stories', () => {
     fetchMock.mock('https://hacker-news.firebaseio.com/v0/item/15904265.json', mockTopStories)
 
+
     const expectedActions = [
-      { type: types.FETCH_TOP_STORY_IDS_SUCCESS, data: mockTopStories }
+      { type: types.FETCH_TOP_STORIES_SUCCESS, data: mockTopStories }
     ]
 
     const store = mockStore({ stories: {
       topStories: {}
     }})
 
-    return store.dispatch(actions.fetchTopStoryIds()).then(() => {
+    return store.dispatch(actions.fetchTopStories([15904265], 0, 1)).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })

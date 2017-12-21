@@ -38,14 +38,11 @@ function fetchTopStoryIdsFailure(ex) {
 
 export function fetchTopStories(storyIds, startIndex, amount) {
   return dispatch => {
+    console.log(storyIds)
     //workaround for infinite scroll running once on load
     if (!storyIds) {
       return
-    }
-    console.log('running fetchTopStories');
-    console.log(storyIds);
-    console.log(startIndex);
-    console.log(amount);    
+    }  
 
     let topStories = [];
 
